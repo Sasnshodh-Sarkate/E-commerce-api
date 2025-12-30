@@ -68,4 +68,24 @@ export class AuthService {
       message: 'Logged out successfully',
     };
   }
+
+  // async refreshTokens(refreshToken: string) {
+  //   try {
+  //     const payload = this.jwtServices.verify(refreshToken);
+
+  //     const newAccessToken = this.jwtServices.sign(
+  //       {
+  //         sub: payload.sub,
+  //         email: payload.email,
+  //       },
+  //       { expiresIn: '15m' },
+  //     );
+
+  //     return {
+  //       access_token: newAccessToken,
+  //     };
+  //   } catch {
+  //     throw new UnauthorizedException('Invalid or expired refresh token');
+  //   }
+  // }
 }

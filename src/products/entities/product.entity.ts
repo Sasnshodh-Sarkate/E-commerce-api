@@ -1,3 +1,4 @@
+// src/products/entities/product.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
 
@@ -26,17 +28,19 @@ export class Product {
   stock: number;
 
   @Column({ nullable: true })
-  imageUrl: string;
+  imageUrl?: string;
 
+  // 👇 Foreign key relation
   @ManyToOne(() => Category, (category) => category.products, {
-    onDelete: 'CASCADE', // If category is deleted, products are deleted
-    nullable: false, // Every product MUST have a category
+    nullable: false,
+    onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'categoryId' }) // FK column auto-created
   category: Category;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
-  upadatedAt: Date;
+  updatedAt: Date;
 }
