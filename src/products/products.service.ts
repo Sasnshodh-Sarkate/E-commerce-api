@@ -13,7 +13,7 @@ export class ProductsService {
   ) {}
 
   async create(dto: CreateProductDto): Promise<Product> {
-    console.log('DTO received:', dto); // 👈 ADD THIS
+    console.log('DTO received:', dto);
 
     const product = this.productRepo.create({
       name: dto.name,
@@ -22,15 +22,15 @@ export class ProductsService {
       stock: dto.stock,
       imageUrl: dto.imageUrl,
 
-      // 🔴 THIS LINE IS MANDATORY
+
       category: { id: dto.categoryId },
     });
 
     return this.productRepo.save(product);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(): Promise<Product[]> {
+    return await this.productRepo.find();
   }
 
   findOne(id: number) {
