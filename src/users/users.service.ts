@@ -42,6 +42,12 @@ export class UsersService {
     });
   }
 
+  async updateRefreshToken(userId: string, refreshToken: string | null) {
+    await this.userRepo.update(userId, {
+      refreshToken,
+    });
+  }
+
   findAll() {
     return `This action returns all users`;
   }

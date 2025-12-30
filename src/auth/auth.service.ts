@@ -60,4 +60,12 @@ export class AuthService {
     //   return `This action removes a #${id} auth`;
     // }
   }
+
+  async logout(userId: string) {
+    await this.usersService.updateRefreshToken(userId, null);
+
+    return {
+      message: 'Logged out successfully',
+    };
+  }
 }

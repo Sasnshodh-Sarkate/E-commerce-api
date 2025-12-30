@@ -42,4 +42,11 @@ export class AuthController {
       timestamp: new Date().toISOString(),
     };
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  logout(@Req() req: any) {
+    console.log('REQ.USER 👉', req.user);
+    return this.authService.logout(req.user?.userId);
+  }
 }
